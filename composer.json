@@ -1,0 +1,10 @@
+{
+    "require": {
+        "monolog/monolog": "1.*",
+        "slim/slim": "2.*",
+        "robmorgan/phinx": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
