@@ -1,7 +1,7 @@
 <?php
-namespace TimeCardMD\Repository\Expression;
+namespace TimeCardMD\Persistence\Expression;
 
-use TimeCardMD\Repository\Expression\Restriction;
+use TimeCardMD\Persistence\Expression\Restriction;
 
 class RestrictionTest extends \PHPUnit_Framework_TestCase
 {

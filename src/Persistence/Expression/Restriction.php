@@ -1,5 +1,5 @@
 <?php
-namespace TimeCardMD\Repository\Expression;
+namespace TimeCardMD\Persistence\Expression;
 class Restriction extends Expression
 {
     /**

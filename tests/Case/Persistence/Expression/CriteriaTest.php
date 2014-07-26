@@ -1,9 +1,9 @@
 <?php
-namespace TimeCardMD\Repository\Expression;
+namespace TimeCardMD\Persistence\Expression;
 
-use TimeCardMD\Repository\Expression\Criteria;
-use TimeCardMD\Repository\Expression\Restriction;
-use TimeCardMD\Repository\Expression\Operator;
+use TimeCardMD\Persistence\Expression\Criteria;
+use TimeCardMD\Persistence\Expression\Restriction;
+use TimeCardMD\Persistence\Operator;
 
 class CriteriaTest extends \PHPUnit_Framework_TestCase
 {
@@ -154,7 +154,7 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
         $Criteria->setLimit('30');
         $expected = 30;
         $result = $Criteria->getLimit();
-        $this->assertEqual($result, $expected);
+        $this->assertEquals($result, $expected);
     }
 
     /**
@@ -175,12 +175,5 @@ class CriteriaTest extends \PHPUnit_Framework_TestCase
         $expected = array('name' => 'DESC', 'age' => 'ASC');
         $result = $Criteria->getOrder();
         $this->assertSame($result, $expected);
-
-        try {
-            $Criteria->setOrder('name ASC');
-        } catch ( \InvalidArgumentException $e) {
-            $this->assertSame($result, $expected);
-        }
-        $this->fail('InvalidArgumentException esperado');
     }
 }
