@@ -1,5 +1,5 @@
 <?php
-namespace TimeCardMD\Repository\Expression;
+namespace TimeCardMD\Repository;
 class Operator
 {
     const _OR = 'OR';

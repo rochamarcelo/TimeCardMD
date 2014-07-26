@@ -1,6 +1,6 @@
 <?php
 namespace TimeCardMD\Repository\Expression;
-class Criteria
+class Criteria extends Expression
 {
     /**
      * Field used in the criteria
@@ -17,13 +17,27 @@ class Criteria
     protected $operator = 'AND';
 
     /**
+     * Rows limit
+     *
+     * @var integer
+     */
+    protected $limit;
+
+    /**
+     * Rows order, normally used in find
+     *
+     * @var array
+     */
+    protected $order = array();
+
+    /**
      * Add an expression
      *
      * @param mixed $expression Expression
      *
      * @return self
      */
-    public function add($expression)
+    public function add(Expression $expression)
     {
         $this->expressions[] = $expression;
         return $this;
@@ -58,7 +72,55 @@ class Criteria
      */
     public function setOperator($operator)
     {
-        $this->operator = $operator;
+        $this->operator = trim($operator);
+
+        return $this;
+    }
+
+    /**
+     * Gets the Rows limit.
+     *
+     * @return integer
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * Sets the Rows limit.
+     *
+     * @param integer $limit the limit
+     *
+     * @return self
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = (int)$limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets the Rows order, normally used in find.
+     *
+     * @return array
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Sets the Rows order, normally used in find.
+     *
+     * @param array $order the order
+     *
+     * @return self
+     */
+    public function setOrder(array $order)
+    {
+        $this->order = $order;
 
         return $this;
     }

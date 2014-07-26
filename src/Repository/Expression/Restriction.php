@@ -1,6 +1,6 @@
 <?php
 namespace TimeCardMD\Repository\Expression;
-class Restriction
+class Restriction extends Expression
 {
     /**
      * Field used in the restriction
