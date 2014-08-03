@@ -87,7 +87,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
         $result = $Storage->destroy();
         $this->assertTrue($result);
 
-        $result = $Storage->get();
+        $result = @$Storage->get();
         $this->assertSame(null, $result);
     }
 }
