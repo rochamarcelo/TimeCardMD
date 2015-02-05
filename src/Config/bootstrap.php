@@ -41,6 +41,16 @@ $app->get('/', function () use ($app) {
     $app->render('/TimeSheet/index.php');
 });
 
+$app->get('/api/v1/timecard', function () use ($app) {
+    $data = $app->TimeCardDate->findAll();
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    $response['X-Powered-By'] = 'Rocha Marcelo';
+    $response->status(200);
+
+    $response->body(json_encode($data));
+});
+
 $app->post('/timecard/:year/:month/:day', function ($year, $month, $day) use ($app) {
     print_r(func_get_args());
     // Sample log message
