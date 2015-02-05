@@ -50,15 +50,51 @@ class TimeCardDate
     public function findAll()
     {
         $entities = $this->persistence->findAll();
-        if ( empty($entities) ) {
-            return array();
+        if ( !is_array($entities) ) {
+            $entities = array();
         }
 
-        foreach ( $entities as $k => $entity ) {
-            $entities[$k] = new TimeCardDateEntity($entity);
+        $entitiesObj = array();
+        foreach ($entities as $entity ) {
+            $obj = new TimeCardDateEntity($entity);
+            $obj->date = new \DateTime($obj->date);
+            $entitiesObj[$obj->date->format('Y-m-d')] = $obj;
         }
 
-        return $entities;
+        $timeCard = array();
+        $indice = 0;
+        $startDate = new \DateTime('2015-01-01 00:00:00');
+        $endDate = new \DateTime();
+
+        while ($startDate <= $endDate ) {
+            $lastDay = $endDate->format('j');
+            $startMonth = new \DateTime($endDate->format('Y-m-01'));
+
+            $timeCard[$indice] = array(
+                'id' => $endDate->format('Ym'),
+                'dates' => array(),
+                'title' => $endDate->format('M / Y'),
+                'active' => $indice == 0
+            );
+
+            for ( $day = 1; $day <= $lastDay; $day++ ) {
+                $currentDate = $startMonth->format('Y-m-d');
+                if ( isset($entitiesObj[$currentDate]) ) {
+                    $timeCard[$indice]['dates'][] = $entitiesObj[$currentDate];
+                } else {
+                    $timeCard[$indice]['dates'][] = new TimeCardDateEntity(
+                        array(
+                            'date' => new \DateTime($currentDate)
+                        )
+                    );
+                }
+                $startMonth->modify('+1 day');
+                $endDate->modify('-1 day');
+            }
+            $indice++;
+        }
+
+        return $timeCard;
     }
 
     /**
